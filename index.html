@@ -16,7 +16,7 @@
     <div class="wrapper">
         <div class="controller" id="controller">
             <form action="" class="controller-form" id="controller-form">
-                <div class="flex-row">
+                <div class="controller-row">
                     <span>flex-direction: </span>
                     <select id="flex-direction" class="controller-list">
                         <option value="row">row</option>
@@ -26,7 +26,7 @@
                     </select>
                 </div>
 
-                <div class="flex-row">
+                <div class="controller-row">
                     <span>flex-wrap: </span>
                     <select id="flex-wrap" class="flex-wrap">
                         <option value="nowrap">nowrap</option>
@@ -35,7 +35,7 @@
                     </select>
                 </div>
 
-                <div class="flex-row">
+                <div class="controller-row">
                     <span>justify-content: </span>
                     <select id="justify-content">
                         <option value="space-around">space-around</option>
@@ -48,20 +48,42 @@
                     </select>
                 </div>
 
-                <div class="flew-row">
+                <div class="controller-row">
                     <span>align-items: </span>
                     <select id="align-items">
                         <option value="flex-start">flex-start</option>
                         <option value="flex-end">flex-end</option>
                         <option value="center">center</option>
-                        <option value="stretch">space-between</option>
-                        <option value="baseline">space-around</option>
+                        <option value="stretch">stretch</option>
+                        <option value="baseline">baseline</option>
+                    </select>
+                </div>
+
+                <div class="controller-row">
+                    <span>align-content: </span>
+                    <select id="align-items">
+                        <option value="flex-start">flex-start</option>
+                        <option value="flex-end">flex-end</option>
+                        <option value="center">center</option>
+                        <option value="stretch">stretch</option>
+                        <option value="baseline">baseline</option>
                     </select>
                 </div>
 
 
+                <div class="controller-row">
+                    <select id="gap-type">
+                        <option value="gap">gap</option>
+                        <option value="row-gap">row-gap</option>
+                        <option value="column-gap">column-gap</option>
+                    </select>
+                    <input type="text" id="gap-value" value="0px 0px">
+                </div>
+
+
             </form>
-        </div> <!-- Listen to (any) value change in this div-->
+        </div>
+        <div class="child-controller" id="child-controller"></div>
         <div class="flex-container" id="flex-container"></div>
     </div>
     <script src="script.js"></script>

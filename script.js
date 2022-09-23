@@ -22,9 +22,6 @@ function createFlexChild(container, amount) {
         child.id = 'flex-child-' + index;
         container.appendChild(child); //flexContainerEl.appendChild(child);
 
-
-
-
     }
 
 }
