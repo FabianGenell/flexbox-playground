@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="controller" id="controller">
+            <form action="" class="controller-form" id="controller-form">
+                <div class="flex-row">
+                    <span>flex-direction: </span>
+                    <select id="flex-direction" class="controller-list">
+                        <option value="row">row</option>
+                        <option value="column">column</option>
+                        <option value="row-reverse">row-reverse</option>
+                        <option value="column-reverse">column-reverse</option>
+                    </select>
+                </div>
+
+                <div class="flex-row">
+                    <span>flex-wrap: </span>
+                    <select id="flex-wrap" class="flex-wrap">
+                        <option value="nowrap">nowrap</option>
+                        <option value="wrap">wrap</option>
+                        <option value="warp-reverse">warp-reverse</option>
+                    </select>
+                </div>
+
+                <div class="flex-row">
+                    <span>justify-content: </span>
+                    <select id="justify-content">
+                        <option value="space-around">space-around</option>
+                        <option value="space-between">space-between</option>
+                        <option value="space-evenly">space-evenly</option>
+                        <option value="flex-start">flex-start</option>
+                        <option value="flex-end">flex-end</option>
+                        <option value="center">center</option>
+
+                    </select>
+                </div>
+
+                <div class="flew-row">
+                    <span>align-items: </span>
+                    <select id="align-items">
+                        <option value="flex-start">flex-start</option>
+                        <option value="flex-end">flex-end</option>
+                        <option value="center">center</option>
+                        <option value="stretch">space-between</option>
+                        <option value="baseline">space-around</option>
+                    </select>
+                </div>
+
+
+            </form>
+        </div> <!-- Listen to (any) value change in this div-->
+        <div class="flex-container" id="flex-container"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
