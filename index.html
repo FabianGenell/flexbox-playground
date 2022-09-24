@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
 </head>
 
@@ -79,7 +80,8 @@
         </section>
 
         <section class="child-controller" id="child-controller">
-
+            <div class="child-controller-head">Flex Child</div>
+            <span class="child-controller-close">x</span>
             <div class="controller-row child-controller-row">
                 <span>order: </span>
                 <input type="text" id="order" value="0">
@@ -109,7 +111,12 @@
             </div>
 
         </section>
-        <div class="flex-container" id="flex-container"></div>
+        <div class="flex-container" id="flex-container">
+        </div>
+        <div onclick="createFlexChild()" class="add-item">
+            <span class="material-symbols-outlined" style="font-size: 30px;">add_circle</span>
+            <span>Add flex item</span>
+        </div>
     </content>
     <script src="script.js"></script>
 </body>
