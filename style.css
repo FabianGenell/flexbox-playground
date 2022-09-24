@@ -1,7 +1,6 @@
 * {
     padding: 0;
     margin: 0;
-    overflow: none;
 }
 
 html {
@@ -12,7 +11,7 @@ html {
     font-size: 16px;
     color: aliceblue;
 
-    --controller-input-bg-color: rgba(54, 54, 54, 0.22);
+    --controller-input-bg-color: rgb(44, 44, 44, 0.4);
 
 }
 
@@ -31,25 +30,73 @@ html {
     overflow: hidden;
 }
 
-.controller-row *{
+.controller-row select, input{
     font-family: "Fira Code", sans-serif;
 
     color: aliceblue;
-    background-color: var(--controller-input-bg-color);
     border: none;
     text-align: center;
-    
+    background-color: inherit;
+
+}
+
+.controller-row {
+    background-color: var(--controller-input-bg-color);
+
+    display: flex;
+    justify-content: space-between;
 }
 
 
-
-.controller-row *:focus{
+.controller-row select, input:focus{
 
     background-color: rgba(54, 54, 54);
     outline: none;
     border: none;
 
 }
+
+
+.controller-row select, input:hover{
+
+    background-color: rgba(54, 54, 54);
+    outline: none;
+    border: none;
+
+}
+
+.controller-row span {
+    cursor: default;
+}
+
+
+.child-controller-row {
+    padding: 10px;
+
+    /* border: 1px dotted rgb(65, 65, 65); */
+}
+.child-controller-row:hover {
+    padding: 10px;
+    background-color: rgba(62, 62, 62, 0.5);
+
+    /* border: 1px dotted rgb(65, 65, 65); */
+}
+.child-controller {
+    position: absolute;
+    left: 0;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: stretch;
+
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--controller-input-bg-color);
+    
+
+}
+
+
 
 
 

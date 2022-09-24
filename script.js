@@ -6,9 +6,13 @@ let children = 0;
 //on change get id of element changed and that id will be the flex-boc property and can be used to update that property.
 controllerEl.addEventListener('change', (e) => {
 
-    console.log(`Updated ${e.target.id} to ${e.target.value}`);
+    let styleKey = e.target.parentNode.id;
+    let styleValue = e.target.value
 
-    flexContainerEl.style[e.target.id] = e.target.value;
+    console.log(`Updated ${styleKey} to ${styleValue}`);
+
+    flexContainerEl.style[styleKey] = styleValue;
+
 
 });
 
