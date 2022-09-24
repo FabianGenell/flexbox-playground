@@ -88,48 +88,75 @@ function childSettings(id) {
 // The current position of mouse
 let x = 0;
 let y = 0;
+let ele;
+
 
 function makeDraggable(element) {
 
     console.log(`Makine element with id ${element.id} draggable`);
 
     //add mousedown event listener to element
-    element.addEventListener('mousedown', (e) => { mouseDownHandler }); //if i remove an item entirely - do i still need to remove its event listeners?
+    element.addEventListener('mousedown', (e) => { mouseDownHandler(e, element) }); //if i remove an item entirely - do i still need to remove its event listeners?
 
 }
 
-function mouseDownHandler(e) {
+function mouseDownHandler(e, element) {
 
-    console.log('mouseDownHandler');
+    ele = element;
 
     // Get the current mouse position
     x = e.clientX;
     y = e.clientY;
+    document.addEventListener('mousemove', mouseMoveHandler);
 
-    document.addEventListener('mousemove', (e) => { mouseMoveHandler });
+    document.addEventListener('mouseup', mouseUpHandler);
 
-    document.addEventListener('mouseup', () => {
-        document.removeEventListener('mousemove', (e) => { mouseMoveHandler });
-        document.removeEventListener('mouseup', mouseUpHandler);
-    });
+
 
 }
 
-function mouseMoveHandler(e) {
+const mouseMoveHandler = function (e) {
+
+
+    // console.log('moseMoveHandler');
 
     // How far the mouse has been moved
-    const dx = e.clientX - x;
-    const dy = e.clientY - y;
+    const dx = x - e.clientX;
+    const dy = y - e.clientY;
 
-    // Set the position of element
-    ele.style.top = `${ele.offsetTop + dy}px`;
-    ele.style.left = `${ele.offsetLeft + dx}px`;
+
+    /*
+    Because as soon as we add a location styling the position: absolute; starts taking effect we have to grab the
+    absolute coordinates to the left (with getBoundingClientRect())
+    */
+    const styleLeft = parseFloat(ele.style.left.split('px')[0]) || ele.getBoundingClientRect().left;
+    const styleTop = parseFloat(ele.style.top.split('px')[0]) || ele.getBoundingClientRect().top;
+
+
+    coordX = styleLeft - dx;
+    coordY = styleTop - dy;
+
+    // console.log('clientX: ' + e.clientX);
+    // console.log('ele.style.left: ' + ele.style.left);
+    // console.log('rect.left: ' + rect.left);
+    // console.log('moved(dx) ( - ): ' + dx);
+    // console.log('left difference (rect - style): ' + (rect.left - ele.style.left.split('px')[0]));
+    // console.log('coordX: ' + coordX);
+
+    ele.style.left = coordX + 'px';
+    ele.style.top = coordY + 'px';
 
     // Reassign the position of mouse
     x = e.clientX;
     y = e.clientY;
 
 }
+
+const mouseUpHandler = function () {
+    // Remove the handlers of `mousemove` and `mouseup`
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+};
 
 
 makeDraggable(document.getElementById('child-controller'));

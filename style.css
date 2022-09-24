@@ -11,6 +11,8 @@ html {
     color: aliceblue;
 
     --controller-input-bg-color: rgb(44, 44, 44, 0.4);
+    overflow: hidden;
+
 
 }
 
@@ -104,8 +106,7 @@ html {
 
 .child-controller {
     position: absolute;
-    left: 0;
-
+    margin: auto;
     display: flex;
     flex-flow: column nowrap;
     align-content: stretch;
@@ -156,6 +157,10 @@ html {
 .child-controller-head {
     cursor: grab;
     user-select: none; 
+}
+
+.child-controller-head:active {
+    cursor: grabbing;
 }
 
 
