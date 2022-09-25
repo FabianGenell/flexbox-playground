@@ -5,19 +5,32 @@ let flexContainerEl = document.getElementById('flex-container');
 let flexChildren = new Array();
 
 //on change get id of element changed and that id will be the flex-box property and can be used to update that property.
-controllerEl.addEventListener('change', (e) => {
+controllerEl.addEventListener('change', (e) => { updateValue(e) });
+
+function updateValue(e) {
     //styleKey is the flexbox property we want to change
     let styleKey = e.target.parentNode.id;
+
+    let targetEl = flexContainerEl;
+
+    //the item settings have the id of the property not in the div but in the input
+    if (!styleKey) {
+        styleKey = e.target.id;
+
+        //Change the target element to the flex item
+        let targetElNumber = e.target.parentNode.parentNode.id.split('-').pop();
+        let targetId = 'flex-child-' + targetElNumber;
+
+        targetEl = document.getElementById(targetId);
+    }
+
     //style value is the value of that property
     let styleValue = e.target.value
 
     console.log(`Updated ${styleKey} to ${styleValue}`);
 
-    flexContainerEl.style[styleKey] = styleValue;
-
-
-});
-
+    targetEl.style[styleKey] = styleValue;
+}
 
 //if you click anywhere in the flex child controller rows it will select typing (focus) in the text box
 childControllerRowEls.forEach(element => {
@@ -54,7 +67,8 @@ function createFlexChild(container, amount) {
 
         //adding the delete and settings buttons
         child.innerHTML = `<span class="material-symbols-outlined flex-child-button" onclick="childSettings('${child.id}')">settings</span>
-    <span class="material-symbols-outlined flex-child-button" onclick="childRemove('${child.id}')">delete</span>`
+    <span class="material-symbols-outlined flex-child-button" onclick="childRemove('${child.id}')">delete</span>
+    <h2>${flexChildren.length}</h2>`
 
         container.appendChild(child); //flexContainerEl.appendChild(child);
 
@@ -81,7 +95,93 @@ function childRemove(id) {
 
 function childSettings(id) {
     console.log(`Opening ${id} flex item settings`);
+
+
+    //get the number from id
+    let number = id.split('flex-child-').pop();
+    let settingsId = 'child-controller-' + number;
+
+
+    //if there already is an element with the id - just make it visible
+    let settingsWindow = document.getElementById(settingsId);
+
+    if (settingsWindow) {
+
+        settingsWindow.style.display = 'block';
+        console.log('Settings window already exists, making it visible');
+        return;
+
+    }
+
+    //since it doesn't exist lets go ahead and create one
+    settingsWindow = document.createElement('section');
+
+    settingsWindow.classList.add('child-controller');
+    settingsWindow.id = settingsId;
+
+    //adding the delete and settings buttons
+    settingsWindow.innerHTML = `
+    <div class="child-controller-head">Flex Item ${number}</div>
+    <span class="child-controller-close" onClick="closeSettings('${settingsId}')">x</span>
+    <div class="controller-row child-controller-row">
+        <span>order: </span>
+        <input type="text" id="order" value="0">
+    </div>
+    <div class="controller-row child-controller-row">
+        <span>flex-grow: </span>
+        <input type="text" id="flew-grow" value="0">
+    </div>
+    <div class="controller-row child-controller-row">
+        <span>flex-shrink: </span>
+        <input type="text" id="flex-shrink" value="0">
+    </div>
+    <div class="controller-row child-controller-row">
+        <span>flex-basis: </span>
+        <input type="text" id="flex-basis" value="0">
+    </div>
+    <div class="controller-row child-controller-row">
+        <span>align-self: </span>
+        <select id="align-self">
+            <option value="auto">auto</option>
+            <option value="flex-start">flex-start</option>
+            <option value="flex-end">flex-end</option>
+            <option value="center">center</option>
+            <option value="stretch">stretch</option>
+            <option value="baseline">baseline</option>
+        </select>
+    </div>
+    <div class="controller-row child-controller-row">
+    <span>width: </span>
+    <input type="text" id="width" value="200px">
+</div>
+<div class="controller-row child-controller-row">
+    <span>height: </span>
+    <input type="text" id="height" value="200px">
+</div>
+
+    `
+
+    makeDraggable(settingsWindow);
+    settingsWindow.addEventListener('change', (e) => { updateValue(e) });
+
+
+    //add settings window to wrapper
+    document.getElementsByClassName('wrapper')[0].appendChild(settingsWindow); //flexContainerEl.appendChild(child);
+
+
 }
+
+function closeSettings(settingsId) {
+    document.getElementById(settingsId).style.display = 'none';
+
+}
+
+
+
+
+
+
+
 
 
 
@@ -93,7 +193,9 @@ let ele;
 
 function makeDraggable(element) {
 
-    console.log(`Makine element with id ${element.id} draggable`);
+    if (!element) { return; }
+
+    console.log(`Making ${element.id} draggable`);
 
     //add mousedown event listener to element
     element.addEventListener('mousedown', (e) => { mouseDownHandler(e, element) }); //if i remove an item entirely - do i still need to remove its event listeners?

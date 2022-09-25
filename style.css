@@ -58,6 +58,10 @@ html {
 }
 
 
+.controller {
+
+    margin-top: 15px;
+}
 
 
 .controller-row {
@@ -101,6 +105,10 @@ html {
     border-radius: 3px;
 
     /* border: 1px dotted rgb(65, 65, 65); */
+}
+
+.child-controller-row select{
+    margin-right:35px;
 }
 
 
@@ -209,6 +217,18 @@ html {
 
     overflow:hidden;
 
+}
+
+.flex-child h2 {
+    position: relative;
+    color:rgb(249, 118, 118);
+
+    font-size: 100px;
+
+    right: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
 
 }
 
@@ -222,6 +242,8 @@ html {
     transition: all .5s;
 
     margin-top: 5px;
+
+    max-height: 15%;
 
 }
 
